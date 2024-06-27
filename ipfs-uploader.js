@@ -1,9 +1,10 @@
 import { create } from "kubo-rpc-client";
 import fs from "fs";
-
+import dotenv from 'dotenv'
+dotenv.config('./.env')
 // import { create, globSource } from 'ipfs'
 
-const ipfs = create("http://localhost:5001");
+const ipfs = create(process.env.IPFS_URL);
 async function uploadFileToIPFS(filePath) {
   const file = fs.readFileSync(filePath);
   const result = await ipfs.add({ path: filePath, content: file });
